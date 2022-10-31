@@ -26,7 +26,7 @@ const InputSubmit = styled.input`
 `
 
 
-const Formulario = () => {
+const Formulario = ({setMonedas}) => {
   const [ criptos, setCriptos ] = useState([])
   const [ error, setError ] = useState(false)
   useEffect(() => {               /* Calls api when Formulario component is ready */
@@ -43,7 +43,7 @@ const Formulario = () => {
   }, [])
 
   /* Si hago simplemente useSelectMonedas(), se ejecuta la funcion del componente del hook.   */
-  const [ moneda, SelectMonedas, Testing ] = useSelectMonedas("Elige tu moneda", monedas)      /* It asigns names in order of the useSelectMonedas's return's array. NOT OBJECT DESTRUCTURING! */
+  const [ moneda, SelectMonedas ] = useSelectMonedas("Elige tu moneda", monedas)      /* It asigns names in order of the useSelectMonedas's return's array. NOT OBJECT DESTRUCTURING! */
   const [ criptomoneda, SelectCriptos ] = useSelectMonedas("Elige tu cripto", criptos)
   //Testing()
 
@@ -54,6 +54,7 @@ const Formulario = () => {
       setError(true)
     } else {
       setError(false)
+      setMonedas({moneda, criptomoneda})
     }
   }
 
